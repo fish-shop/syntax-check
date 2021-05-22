@@ -4,7 +4,7 @@
 
 A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
 
-<img src="example.png" width="400">
+<img src="example.png" width="800">
 
 ## Usage
 
