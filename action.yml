@@ -11,6 +11,8 @@ runs:
   using: "composite"
   steps:
     - run: |
+        set -gx TERM xterm-256color
+
         set -l passes 0
         set -l failures 0
 
