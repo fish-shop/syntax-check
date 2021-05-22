@@ -19,7 +19,7 @@ jobs:
         uses: fish-shop/syntax-check@1.0.0
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against specify a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against provide a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
 
 ```yaml
 ...
