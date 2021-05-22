@@ -1,0 +1,50 @@
+name: 'fish-shop/syntax-check'
+description: 'A GitHub action for syntax checking fish shell files'
+branding:
+  icon: 'check'
+  color: 'green'
+inputs:
+  pattern:
+    description: 'File name pattern'
+    default: '**.fish'
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        set -l passes 0
+        set -l failures 0
+
+        for file in ${{ inputs.pattern }}
+            echo -n "  "
+            set output (fish --no-execute $file 2>&1)
+            if test $status -ne 0
+                set_color red; and echo -n "✖"; and set_color normal
+                echo " $file"
+                for line in (string split $output)
+                    echo "      $line"
+                end
+                set fail (math $failures + 1)
+            else
+                set_color green; and echo -n "✔"; and set_color normal
+                echo " $file"
+                set pass (math $passes + 1)
+            end
+        end
+
+        set -l total (math $passes + $failures)
+
+        echo
+        set_color green; and echo -n "passed: $passes"; and set_color normal
+        echo -n "  "
+        set_color red; and echo -n "failed: $failures"; and set_color normal
+        echo "  of $total files"
+        echo
+
+        if test $failures -gt 0
+            set_color red; and echo "$failures of $total failed."
+        else
+            set_color green; and echo "All of $total files passed!"
+        end
+
+        exit $failures
+      shell: fish {0}
