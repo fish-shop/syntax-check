@@ -6,6 +6,10 @@ A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
 
 <img src="example.png" width="800">
 
+## Prerequisites
+
+This action requires the [fish shell](https://fishshell.com). You can install it within jobs in your workflow using the [install-fish](https://github.com/fish-actions/install-fish) action.
+
 ## Usage
 
 Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
