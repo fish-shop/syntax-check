@@ -25,11 +25,11 @@ runs:
                 for line in (string split $output)
                     echo "      $line"
                 end
-                set fail (math $failures + 1)
+                set failures (math $failures + 1)
             else
                 set_color green; and echo -n "✔"; and set_color normal
                 echo " $file"
-                set pass (math $passes + 1)
+                set passes (math $passes + 1)
             end
         end
 
