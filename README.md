@@ -6,6 +6,10 @@ A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
 
 <img src="example.png" width="800">
 
+## Prerequisites
+
+This action requires the [fish shell](https://fishshell.com). You can install it within jobs in your workflow using the [install-fish](https://github.com/fish-actions/install-fish) action.
+
 ## Usage
 
 Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
@@ -19,7 +23,7 @@ jobs:
         uses: fish-shop/syntax-check@1.0.0
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against specify a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against provide a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
 
 ```yaml
 ...
