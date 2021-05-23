@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Syntax check
-        uses: fish-shop/syntax-check@1.0.0
+        uses: fish-shop/syntax-check@1.0.1
 ```
 
 By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against provide a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
@@ -29,7 +29,7 @@ By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension ar
 ...
 steps:
   - name: Syntax check
-    uses: fish-shop/syntax-check@1.0.0
+    uses: fish-shop/syntax-check@1.0.1
     with:
       pattern: src/**.fish
 ```
