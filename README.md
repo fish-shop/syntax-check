@@ -34,6 +34,18 @@ steps:
       pattern: src/**.fish
 ```
 
+Multiple `pattern` values are also supported:
+
+```yaml
+...
+steps:
+  - name: Syntax check
+    uses: fish-shop/syntax-check@1.0.1
+    with:
+      pattern: conf.d/**.fish functions/pond.fish completions/**.fish
+```
+
+
 ## Acknowledgements
 
 * This project was inspired by [fish-actions/syntax-check](https://github.com/fish-actions/syntax-check).
