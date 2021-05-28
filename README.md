@@ -8,43 +8,48 @@ A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
 
 ## Prerequisites
 
-This action requires the [fish shell](https://fishshell.com). You can install it within jobs in your workflow using the [install-fish](https://github.com/fish-actions/install-fish) action.
+This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-actions/install-fish](https://github.com/fish-actions/install-fish) action.
 
 ## Usage
 
 Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
 
 ```yaml
-jobs:
-  syntax-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Syntax check
-        uses: fish-shop/syntax-check@1.0.1
+- name: Syntax check
+  uses: fish-shop/syntax-check@v1
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against provide a value for the `pattern` input. For example, to check all `.fish` files in the `src` directory of your repository:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against, provide a value for the `pattern` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
 
 ```yaml
-...
-steps:
-  - name: Syntax check
-    uses: fish-shop/syntax-check@1.0.1
-    with:
-      pattern: src/**.fish
+- name: Syntax check
+  uses: fish-shop/syntax-check@v1
+  with:
+    pattern: src/**.fish
 ```
 
-Multiple `pattern` values are also supported:
+Multiple space-separated `pattern` values are supported and can include [wildcards](http://fishshell.com/docs/current/index.html#wildcards-globbing) and [brace expansion](http://fishshell.com/docs/current/index.html#brace-expansion):
 
 ```yaml
-...
-steps:
-  - name: Syntax check
-    uses: fish-shop/syntax-check@1.0.1
-    with:
-      pattern: conf.d/**.fish functions/pond.fish completions/**.fish
+- name: Syntax check
+  uses: fish-shop/syntax-check@v1
+  with:
+    pattern: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
 ```
 
+## Action versions
+
+Use on of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/syntax-check@{ref}`):
+
+* The major version tag (e.g. `v1`) - will always point at the latest `v1.*` release and will include non-breaking changes and bug fixes
+* The minor version tag (e.g. `v1.1`) - will always point at the latest `v1.1.*` release and will include bug fixes
+* The patch version tag (e.g. `v1.1.0`) - will always point at the `v1.1.0` release
+* The branch reference `main` - will include the latest changes from the `main` branch
+* A specific commit SHA (e.g. `c3aad46b6014e86ab163e323bdfc79c987de0eba`)
+
+The recommended form is `vX` (e.g. `v1`). This will ensure that the version of the action used in your workflow includes the latest non-breaking changes and bug fixes, and guarantees compatibility with previous versions of that major release number.
+
+Referencing `main` in your workflow is _not_ recommended as this branch may include breaking changes intended for the next major release.
 
 ## Acknowledgements
 
