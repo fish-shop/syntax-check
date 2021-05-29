@@ -39,17 +39,17 @@ Multiple space-separated `pattern` values are supported and can include [wildcar
 
 ## Action versions
 
-Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/syntax-check@{ref}`):
+Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/install-plugin-manager@{ref}`):
 
-* The major version tag (e.g. `v1`) - will always point at the latest `v1.*` release and will include non-breaking changes and bug fixes
-* The minor version tag (e.g. `v1.1`) - will always point at the latest `v1.1.*` release and will include bug fixes
-* The patch version tag (e.g. `v1.1.0`) - will always point at the `v1.1.0` release
-* The branch reference `main` - will include the latest changes from the `main` branch
-* A specific commit SHA (e.g. `c3aad46b6014e86ab163e323bdfc79c987de0eba`)
+| Pattern  | Example   | Description                                                            |
+|----------|-----------|------------------------------------------------------------------------|
+| `vX`     | `v1`      | the latest `v1.*` release including non-breaking changes and bug fixes |
+| `vX.Y`   | `v1.1`    | the latest `v1.1.*` release including bug fixes                        |
+| `vX.Y.Z` | `v1.1.0`  | the `v1.1.0` release only                                      |                
 
-The recommended form is `vX` (e.g. `v1`). This will ensure that the version of the action used in your workflow includes the latest non-breaking changes and bug fixes, and guarantees compatibility with previous versions of that major release number.
+The recommended pattern is `vX` (e.g. `v1`). This will ensure that the version of the action used in your workflow includes the latest non-breaking changes and bug fixes, and guarantees compatibility with previous versions of that major release number.
 
-Referencing `main` in your workflow is _not_ recommended as this branch may include breaking changes intended for the next major release.
+Using a `main` branch reference in your workflow is _not_ recommended as this branch may include breaking changes intended for the next major release.
 
 ## Acknowledgements
 
