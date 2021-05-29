@@ -39,7 +39,7 @@ Multiple space-separated `pattern` values are supported and can include [wildcar
 
 ## Action versions
 
-Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/install-plugin-manager@{ref}`):
+Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/syntax-check@{ref}`):
 
 | Pattern  | Example   | Description                                                            |
 |----------|-----------|------------------------------------------------------------------------|
