@@ -51,6 +51,13 @@ The recommended pattern is `vX` (e.g. `v1`). This will ensure that the version o
 
 Using a `main` branch reference in your workflow is _not_ recommended as this branch may include breaking changes intended for the next major release.
 
+## Other GitHub actions
+
+A number of related composite actions are also available from the [fish-shop](https://github.com/fish-shop) 🐟. Check them out:
+
+* [fish-shop/install-plugin](https://github.com/fish-shop/install-plugin) - A GitHub action for installing fish shell plugins
+* [fish-shop/install-plugin-manager](https://github.com/fish-shop/install-plugin-manager) - A GitHub action for installing a fish shell plugin manager
+
 ## Acknowledgements
 
 * This project was inspired by [fish-actions/syntax-check](https://github.com/fish-actions/syntax-check).
