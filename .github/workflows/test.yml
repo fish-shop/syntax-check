@@ -28,13 +28,7 @@ jobs:
               echo "valid-syntax"
           end
           EOF
-      - if: github.event_name != 'pull_request'
-        name: Syntax check valid fish file using action from main branch
-        uses: fish-shop/syntax-check@main
-        with:
-          pattern: valid-syntax.fish
-      - if: github.event_name == 'pull_request'
-        name: Syntax check valid fish file using action from pull-request branch
+      - name: Syntax check valid fish file
         uses: ./.
         with:
           pattern: valid-syntax.fish
