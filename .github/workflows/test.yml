@@ -9,6 +9,8 @@ on:
   release:
     types:
       - published
+  schedule:
+    - cron: '30 19 * * *'
 jobs:
   tests:
     strategy:
