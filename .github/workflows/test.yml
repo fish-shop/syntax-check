@@ -31,6 +31,6 @@ jobs:
           end
           EOF
       - name: Syntax check valid fish file
-        uses: ./.
+        uses: ./
         with:
           pattern: valid-syntax.fish
