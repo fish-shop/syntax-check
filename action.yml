@@ -6,6 +6,7 @@ branding:
 inputs:
   pattern:
     description: 'File name pattern'
+    required: false
     default: '**.fish'
 runs:
   using: "composite"
