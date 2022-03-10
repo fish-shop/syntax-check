@@ -28,7 +28,7 @@ By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension ar
     pattern: src/**.fish
 ```
 
-Multiple space-separated `pattern` values are supported and can include [wildcards](http://fishshell.com/docs/current/index.html#wildcards-globbing) and [brace expansion](http://fishshell.com/docs/current/index.html#brace-expansion):
+Multiple space-separated `pattern` values are supported and can include [wildcards](http://fishshell.com/docs/current/index.html#wildcards-globbing) and [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace%20expansion#brace-expansion):
 
 ```yaml
 - name: Syntax check
