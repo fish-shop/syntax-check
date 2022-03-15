@@ -19,7 +19,8 @@ jobs:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
+    steps:
       - run: |
-        sudo apt-add-repository --yes ppa:fish-shell/release-3
-        sudo apt-get update -qq
-        sudo apt-get install --yes fish
+          sudo apt-add-repository --yes ppa:fish-shell/release-3
+          sudo apt-get update -qq
+          sudo apt-get install --yes fish
