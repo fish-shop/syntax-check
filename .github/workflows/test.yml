@@ -30,7 +30,35 @@ jobs:
               echo "valid-syntax"
           end
           EOF
+      - name: Create syntactically invalid fish shell function
+        run: |
+          cat << EOF >./invalid-syntax.fish
+          end
+          EOF
       - name: Syntax check valid fish file
+        id: check-valid-file
+        continue-on-error: true
         uses: ./
         with:
           pattern: valid-syntax.fish
+      - name: Syntax check invalid fish file
+        id: check-invalid-file
+        continue-on-error: true
+        uses: ./
+        with:
+          pattern: invalid-syntax.fish
+      - name: Check outcomes
+        run: |
+          exit_code=0
+
+          if [[ "${{ steps.check-valid-file.outcome }}" != "success" ]]; then
+              echo "Action is expected to succeed for file with valid syntax"
+              exit_code=1
+          fi
+
+          if [[ "${{ steps.check-invalid-file.outcome }}" != "failure" ]]; then
+              echo "Action is expected to fail for file with invalid syntax"
+              exit_code=1
+          fi
+
+          exit ${exit_code}
