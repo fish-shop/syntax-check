@@ -28,3 +28,4 @@ jobs:
       uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
         use-verbose-mode: yes
+        config-file: "markdown_link_check_config.json"
