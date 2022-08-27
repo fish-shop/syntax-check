@@ -1,8 +1,14 @@
+<img alt="fish" src="images/fish-market.png" width="160" align="right">
+
 # fish-shop/syntax-check
 
 [![Tests](https://img.shields.io/github/workflow/status/fish-shop/syntax-check/tests?color=brightgreen&label=tests)](https://github.com/fish-shop/syntax-check/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/syntax-check)](https://github.com/fish-shop/syntax-check/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/syntax-check/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
 
 A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
+
+<hr>
+
+Here's an example from the test workflow for [Pond](https://github.com/marcransome/pond):
 
 <img src="example.png">
 
@@ -61,7 +67,8 @@ A number of related composite actions are also available from the [fish-shop](ht
 
 ## Acknowledgements
 
-* This project was inspired by [fish-actions/syntax-check](https://github.com/fish-actions/syntax-check).
+* This project was inspired by [fish-actions/syntax-check](https://github.com/fish-actions/syntax-check)
+* Fish market icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)
 
 ## License
 `fish-shop/syntax-check` is provided under the terms of the [MIT License](https://opensource.org/licenses/mit-license.php).
