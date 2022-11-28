@@ -74,4 +74,4 @@ A number of related composite actions are also available from the [fish-shop](ht
 `fish-shop/syntax-check` is provided under the terms of the [MIT License](https://opensource.org/licenses/mit-license.php).
 
 ## Contact
-Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or tweet [@marcransome](http://www.twitter.com/marcransome).
+Email me at [marc.ransome@fidgetbox.co.uk](mailto:marc.ransome@fidgetbox.co.uk) or [create an issue](https://github.com/fish-shop/syntax-check/issues).
