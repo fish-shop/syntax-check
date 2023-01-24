@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: vweevers/additional-tags-action@v1
+      - uses: vweevers/additional-tags-action@v2
