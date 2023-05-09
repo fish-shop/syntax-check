@@ -1,4 +1,4 @@
-name: Release tag management
+name: release-tags
 on:
   push:
     tags:
