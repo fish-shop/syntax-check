@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install fish shell
         uses: fish-actions/install-fish@v1
       - name: Create syntactically valid fish shell function
