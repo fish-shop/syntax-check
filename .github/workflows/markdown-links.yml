@@ -14,20 +14,6 @@ on:
   workflow_dispatch:
 jobs:
   markdown-links:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Check links in modified Markdown files
-      if: github.event_name == 'pull_request'
-      uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        base-branch: main
-        check-modified-files-only: yes
-        use-verbose-mode: yes
-        config-file: .github/markdown-links.json
-    - name: Check links in all Markdown files
-      if: github.event_name != 'pull_request'
-      uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-verbose-mode: yes
-        config-file: .github/markdown-links.json
+    uses: fish-shop/workflows/.github/workflows/markdown-links.yml@v1
+    with:
+      config-path: .github/markdown-links.json
