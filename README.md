@@ -14,7 +14,7 @@ Here's an example from the test workflow for [Pond](https://github.com/marcranso
 
 ## Prerequisites
 
-This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-actions/install-fish](https://github.com/fish-actions/install-fish) action.
+This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
 
 ## Usage
 
