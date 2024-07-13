@@ -1,19 +1,8 @@
 name: markdown-links
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
-  release:
-    types:
-      - published
-  schedule:
-    - cron: "0 18 * * 1"
-  workflow_dispatch:
 jobs:
   markdown-links:
-    uses: fish-shop/workflows/.github/workflows/markdown-links.yml@7d07ec34167ad8709a9d12c7f4814fa771b62a81 # v1.8.0
-    with:
-      config-path: .github/markdown-links.json
+    uses: fish-shop/workflows/.github/workflows/markdown-links.yml@0d032d552619809e6c6e8480c63e1ef0110c5f25 # v1.9.1
