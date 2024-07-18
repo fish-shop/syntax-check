@@ -12,42 +12,19 @@ runs:
   using: "composite"
   steps:
     - run: |
-        set -gx TERM xterm-256color
-
-        set -l passes 0
-        set -l failures 0
+        set failures 0
 
         for file in ${{ inputs.pattern }}
-            echo -n "  "
             set output (fish --no-execute $file 2>&1)
             if test $status -ne 0
-                set_color red; and echo -n "✖"; and set_color normal
-                echo " $file"
-                for line in (string split $output)
-                    echo "      $line"
-                end
+                string match --regex --groups-only '^(?<file>.+)\s+\(line\s+(?<line>[0-9]+)\):\s+(?<message>.+)' $output
+                set title "Error while reading file $file"
+                echo "::error file=$file,line=$line,title=$title::$message"
                 set failures (math $failures + 1)
-            else
-                set_color green; and echo -n "✔"; and set_color normal
-                echo " $file"
-                set passes (math $passes + 1)
             end
         end
 
-        set -l total (math $passes + $failures)
-
-        echo
-        set_color green; and echo -n "passed: $passes"; and set_color normal
-        echo -n "  "
-        set_color red; and echo -n "failed: $failures"; and set_color normal
-        echo "  of $total files"
-        echo
-
         if test $failures -gt 0
-            set_color red; and echo "$failures of $total failed."
-        else
-            set_color green; and echo "All of $total files passed!"
+            exit 1
         end
-
-        exit $failures
       shell: fish {0}
