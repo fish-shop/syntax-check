@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Install fish shell
-        uses: fish-shop/install-fish-shell@5becbaf2d281dbd666395dafd55fc9d269866204 # v1.0.7
+        uses: fish-shop/install-fish-shell@1293cbedb85750094e080ab12fc488f345923ab1 # v1.0.8
       - name: Create syntactically valid fish shell function
         run: |
           cat << EOF >./valid-syntax.fish
