@@ -17,7 +17,7 @@ runs:
         set -l passes 0
         set -l failures 0
 
-        for file in (string split --no-empty "" "$PATTERN")
+        for file in (string split --no-empty " " "$PATTERN")
             echo -n "  "
             set output (fish --no-execute $file 2>&1)
             if test $status -ne 0
