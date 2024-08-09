@@ -25,7 +25,7 @@ Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/
   uses: fish-shop/syntax-check@v1
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file patterns to match against, provide one or more space-seperated values for the `patterns` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. Specify one or more space-seperated values for the `patterns` input to override the default behaviour. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
 
 ```yaml
 - name: Syntax check
