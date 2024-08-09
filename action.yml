@@ -21,7 +21,7 @@ runs:
         set -l failures 0
 
         for pattern in (string split --no-empty -- " " $PATTERNS)
-            set -l escaped (string escape --style=script --no-quoted -- $patterns)
+            set -l escaped (string escape --style=script --no-quoted -- $pattern)
             set -l escaped (string replace -r -a '\\\([?*{}])' '$1' $escaped)
 
             eval set -l files $escaped
