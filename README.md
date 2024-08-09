@@ -25,22 +25,22 @@ Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/
   uses: fish-shop/syntax-check@v1
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To specify a different file pattern to match against, provide a value for the `pattern` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
 
 ```yaml
 - name: Syntax check
   uses: fish-shop/syntax-check@v1
   with:
-    pattern: src/**.fish
+    patterns: src/**.fish
 ```
 
-Multiple space-separated `pattern` values are supported and can include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
+Each pattern value may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
 
 ```yaml
 - name: Syntax check
   uses: fish-shop/syntax-check@v1
   with:
-    pattern: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
+    patterns: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
 ```
 
 ## Action versions
