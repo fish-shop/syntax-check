@@ -45,13 +45,13 @@ jobs:
         continue-on-error: true
         uses: ./
         with:
-          pattern: valid-syntax.fish
+          patterns: valid-syntax.fish
       - name: Syntax check invalid fish file
         id: check-invalid-file
         continue-on-error: true
         uses: ./
         with:
-          pattern: invalid-syntax.fish
+          patterns: invalid-syntax.fish
       - name: Check outcomes
         run: |
           exit_code=0
