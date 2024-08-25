@@ -28,42 +28,159 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Install fish shell
         uses: fish-shop/install-fish-shell@720ad65b07b693d9332d73aaf811502196c1efb8 # v1.0.12
-      - name: Create syntactically valid fish shell function
+      - name: Create syntactically valid fish shell file
         run: |
-          cat << EOF >./valid-syntax.fish
+          echo "\
           function valid-syntax
               echo "valid-syntax"
-          end
-          EOF
-      - name: Create syntactically invalid fish shell function
-        run: |
-          cat << EOF >./invalid-syntax.fish
-          end
-          EOF
-      - name: Syntax check valid fish file
-        id: check-valid-file
+          end" > ./valid-syntax.fish
+        shell: fish {0}
+      - name: Syntax check valid fish shell file
+        id: passing-checks
         continue-on-error: true
         uses: ./
         with:
           patterns: valid-syntax.fish
-      - name: Syntax check invalid fish file
-        id: check-invalid-file
+          title: 'Passing syntax checks summary'
+      - name: Check passing syntax checks outcome
+        run: |
+          if test "${{ steps.passing-checks.outcome }}" != "success"
+              echo "Action is expected to succeed for syntactically valid file"
+              exit 1
+          end
+        shell: fish {0}
+      - name: Check passing syntax checks output parameters
+        env:
+          TOTAL: ${{ steps.passing-checks.outputs.total }}
+          PASSED: ${{ steps.passing-checks.outputs.passed }}
+          FAILED: ${{ steps.passing-checks.outputs.failed }}
+        run: |
+          set failures 0
+
+          set expected_total 1
+          if test "$TOTAL" != "$expected_total"
+              echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'total' equals expected value $expected_total"
+          end
+
+          set expected_passes 1
+          if test "$PASSED" != "$expected_passes"
+              echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'passed' equals expected value $expected_passes"
+          end
+
+          set expected_failures 0
+          if test "$FAILED" != "$expected_failures"
+              echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'failed' equals expected value $expected_failures"
+          end
+
+          exit $failures
+        shell: fish {0}
+      - name: Create syntactically invalid fish shell file
+        run: |
+          echo "\
+          end" > ./invalid-syntax.fish
+        shell: fish {0}
+      - name: Syntax check invalid fish shell file
+        id: failing-checks
         continue-on-error: true
         uses: ./
         with:
           patterns: invalid-syntax.fish
-      - name: Check outcomes
+          title: 'Failing syntax checks summary'
+      - name: Check failing syntax checks outcome
         run: |
-          exit_code=0
+          if test "${{ steps.failing-checks.outcome }}" != "failure"
+              echo "Action is expected to fail for syntactically invalid file"
+              exit 1
+          end
+        shell: fish {0}
+      - name: Check failing syntax checks output parameters
+        env:
+          TOTAL: ${{ steps.failing-checks.outputs.total }}
+          PASSED: ${{ steps.failing-checks.outputs.passed }}
+          FAILED: ${{ steps.failing-checks.outputs.failed }}
+        run: |
+          set failures 0
 
-          if [[ "${{ steps.check-valid-file.outcome }}" != "success" ]]; then
-              echo "Action is expected to succeed for file with valid syntax"
-              exit_code=1
-          fi
+          set expected_total 1
+          if test "$TOTAL" != "$expected_total"
+              echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'total' equals expected value $expected_total"
+          end
 
-          if [[ "${{ steps.check-invalid-file.outcome }}" != "failure" ]]; then
-              echo "Action is expected to fail for file with invalid syntax"
-              exit_code=1
-          fi
+          set expected_passes 0
+          if test "$PASSED" != "$expected_passes"
+              echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'passed' equals expected value $expected_passes"
+          end
 
-          exit ${exit_code}
+          set expected_failures 1
+          if test "$FAILED" != "$expected_failures"
+              echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'failed' equals expected value $expected_failures"
+          end
+
+          exit $failures
+        shell: fish {0}
+      - name: Syntax check mixed valid/invalid fish shell files
+        id: mixed-checks
+        continue-on-error: true
+        uses: ./
+        with:
+          patterns: 'valid-syntax.fish invalid-syntax.fish'
+          title: 'Mixed syntax checks summary'
+      - name: Check mixed syntax checks outcome
+        run: |
+          if test "${{ steps.mixed-checks.outcome }}" != "failure"
+              echo "Action is expected to fail for syntactically invalid file"
+              exit 1
+          end
+        shell: fish {0}
+      - name: Check mixed syntax checks output parameters
+        env:
+          TOTAL: ${{ steps.mixed-checks.outputs.total }}
+          PASSED: ${{ steps.mixed-checks.outputs.passed }}
+          FAILED: ${{ steps.mixed-checks.outputs.failed }}
+        run: |
+          set failures 0
+
+          set expected_total 2
+          if test "$TOTAL" != "$expected_total"
+              echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'total' equals expected value $expected_total"
+          end
+
+          set expected_passes 1
+          if test "$PASSED" != "$expected_passes"
+              echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'passed' equals expected value $expected_passes"
+          end
+
+          set expected_failures 1
+          if test "$FAILED" != "$expected_failures"
+              echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'failed' equals expected value $expected_failures"
+          end
+
+          exit $failures
+        shell: fish {0}

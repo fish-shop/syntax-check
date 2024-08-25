@@ -4,21 +4,39 @@ branding:
   icon: 'check'
   color: 'green'
 inputs:
+  title:
+    description: 'Title to display in job summary'
+    required: false
+    default: 'Syntax check results'
   patterns:
     description: 'File patterns to match against when running syntax checks'
     required: false
     default: '**.fish'
+outputs:
+  total:
+    description: "Total number of files syntax checked"
+    value: ${{ steps.syntax-check.outputs.total }}
+  passed:
+    description: "Number of files passed syntax check"
+    value: ${{ steps.syntax-check.outputs.passed }}
+  failed:
+    description: "Number of files failed syntax check"
+    value: ${{ steps.syntax-check.outputs.failed }}
 runs:
   using: "composite"
   steps:
     - name: Syntax check fish shell files
+      id: syntax-check
       env:
+        TITLE: ${{ inputs.title }}
         PATTERNS: ${{ inputs.patterns }}
       run: |
         set -gx TERM xterm-256color
 
-        set -l passes 0
-        set -l failures 0
+        set -l passed 0
+        set -l failed 0
+
+        set title "$TITLE"
 
         for pattern in (string split --no-empty -- " " $PATTERNS)
             set -l escaped (string escape --style=script --no-quoted -- $pattern)
@@ -35,29 +53,47 @@ runs:
                     for line in (string split -- $output)
                         echo "      $line"
                     end
-                    set failures (math $failures + 1)
+                    set failed (math $failed + 1)
                 else
                     set_color green; and echo -n "✔"; and set_color normal
                     echo " $file"
-                    set passes (math $passes + 1)
+                    set passed (math $passed + 1)
                 end
             end
         end
 
-        set -l total (math $passes + $failures)
+        set -l total (math $passed + $failed)
 
         echo
-        set_color green; and echo -n "passed: $passes"; and set_color normal
+        set_color green; and echo -n "passed: $passed"; and set_color normal
         echo -n "  "
-        set_color red; and echo -n "failed: $failures"; and set_color normal
+        set_color red; and echo -n "failed: $failed"; and set_color normal
         echo "  of $total files"
         echo
 
-        if test $failures -gt 0
-            set_color red; and echo "$failures of $total failed."
+        if test $failed -gt 0
+            set_color red; and echo "$failed of $total failed."
         else
             set_color green; and echo "All of $total files passed!"
         end
 
-        exit $failures
+        if test $failed -eq 0
+            set result ":white_check_mark: Pass"
+        else
+            set result ":x: Fail"
+        end
+
+        echo "### $title" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Result :microscope: | Passed :white_check_mark: | Failed :x: |" >> $GITHUB_STEP_SUMMARY
+        echo "|---------------------|---------------------------|------------|" >> $GITHUB_STEP_SUMMARY
+        echo "| $result             | $passed                   | $failed    |" >> $GITHUB_STEP_SUMMARY
+
+        echo "total=$total" >> "$GITHUB_OUTPUT"
+        echo "passed=$passed" >> "$GITHUB_OUTPUT"
+        echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
+        if test $failed -ne 0
+            exit 1
+        end
       shell: fish {0}
