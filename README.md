@@ -14,22 +14,22 @@ Here's an example from the test workflow for [Pond](https://github.com/marcranso
 
 ## Prerequisites
 
-This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
+This action requires [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
 
 ## Usage
 
-Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
+Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
 
 ```yaml
 - name: Syntax check
-  uses: fish-shop/syntax-check@v1
+  uses: fish-shop/syntax-check@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are checked. To override the default behaviour, provide one or more space-separated pattern values to the `patterns` input. For example, to check all `.fish` files starting in the `src` directory and descending into subdirectories:
 
 ```yaml
 - name: Syntax check
-  uses: fish-shop/syntax-check@v1
+  uses: fish-shop/syntax-check@v2
   with:
     patterns: src/**.fish
 ```
@@ -38,13 +38,38 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
 
 ```yaml
 - name: Syntax check
-  uses: fish-shop/syntax-check@v1
+  uses: fish-shop/syntax-check@v2
   with:
     patterns: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
 ```
 
 > [!IMPORTANT]
 > The `?` wildcard character is [deprecated](https://fishshell.com/docs/current/language.html#wildcards-globbing) and can be disabled via the `fish` feature flag `qmark-noglob`. Support for the `?` wildcard may therefore be dependent upon the version of `fish` shell in use and/or the configuration of its feature flags.
+
+## Inputs
+
+Configure the action using the following inputs:
+
+| Name         | Description                            | Default               |
+|--------------|----------------------------------------|-----------------------|
+| `patterns`   | A space-separated list of file patterns to match against when running syntax checks; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
+| `title`      | The title to display in the [job summary](#job-summary); can be used to distinguish multiple summaries generated from a single workflow  | `Syntax check results` |
+
+## Outputs
+
+The following outputs are made available to subsequent steps in a workflow:
+
+| Name     | Description                                   |
+|----------|-----------------------------------------------|
+| `total`  | The total number of files syntax checked      |
+| `passed` | The number of files that passed syntax checks |
+| `failed` | The number of files that failed syntax checks |
+
+## Job summary
+
+This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the workflow run summary page:
+
+<img alt="job-summary" src="images/job-summary.png" width="909">
 
 ## Action versions
 
