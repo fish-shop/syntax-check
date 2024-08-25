@@ -43,6 +43,9 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
     patterns: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
 ```
 
+> [!IMPORTANT]
+> The `?` wildcard character is [deprecated](https://fishshell.com/docs/current/language.html#wildcards-globbing) and can be disabled via the `fish` feature flag `qmark-noglob`. Support for the `?` wildcard may therefore be dependent upon the version of `fish` shell in use and/or the configuration of its feature flags.
+
 ## Action versions
 
 Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/syntax-check@{ref}`):
