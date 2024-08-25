@@ -43,6 +43,9 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
     patterns: init.fish functions/**.fish {conf.d,completions}/**.fish tests/???-*.fish
 ```
 
+> [!IMPORTANT]
+> The `?` wildcard character is [deprecated](https://fishshell.com/docs/current/language.html#wildcards-globbing) and can be disabled via the `fish` feature flag `qmark-noglob`. Support for the `?` wildcard may therefore be dependent upon the version of `fish` shell in use and/or the configuration of its feature flags.
+
 ## Inputs
 
 Configure the action using the following inputs:
@@ -67,7 +70,6 @@ The following outputs are made available to subsequent steps in a workflow:
 This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the workflow run summary page:
 
 <img alt="job-summary" src="images/job-summary.png" width="909">
-
 
 ## Action versions
 
