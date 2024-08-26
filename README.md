@@ -72,7 +72,7 @@ Syntax issues identified by this action are displayed as [annotations](https://g
 
 <img alt="Workflow summary annotations" src="images/annotations-workflow-summary.png" width="909">
 
-Annotations are also displayed for changes introduced by a pull request:
+Annotations are also displayed directly alongside the code in the 'Files changed' tab of pull requests:
 
 <img alt="Pull request annotations" src="images/annotations-pull-request.png" width="909">
 
