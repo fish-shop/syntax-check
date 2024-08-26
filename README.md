@@ -50,10 +50,11 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
 
 Configure the action using the following inputs:
 
-| Name         | Description                            | Default               |
-|--------------|----------------------------------------|-----------------------|
-| `patterns`   | A space-separated list of file patterns to match against when running syntax checks; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
-| `title`      | The title to display in the [job summary](#job-summary); can be used to distinguish multiple summaries generated from a single workflow  | `Syntax check results` |
+| Name          | Description                            | Default               |
+|---------------|----------------------------------------|-----------------------|
+| `annotations` | The string value `'true'` or `'false'` indicating whether to enable [annotations](#annotations) or not | `true` |
+| `patterns`    | A space-separated list of file patterns to match against when running syntax checks; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
+| `title`       | The title to display in the [job summary](#job-summary); can be used to distinguish multiple summaries generated from a single workflow  | `Syntax check results` |
 
 ## Outputs
 
@@ -65,11 +66,23 @@ The following outputs are made available to subsequent steps in a workflow:
 | `passed` | The number of files that passed syntax checks |
 | `failed` | The number of files that failed syntax checks |
 
+## Annotations
+
+Syntax issues identified by this action are displayed as [annotations](https://github.blog/news-insights/product-news/introducing-check-runs-and-annotations/) on the workflow summary page:
+
+<img alt="Workflow summary annotations" src="images/annotations-workflow-summary.png" width="909">
+
+Annotations are also displayed for changes introduced by a pull request:
+
+<img alt="Pull request annotations" src="images/annotations-pull-request.png" width="909">
+
+This behaviour can be disabled by setting the `annotations` input to `false`.
+
 ## Job summary
 
 This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the workflow run summary page:
 
-<img alt="job-summary" src="images/job-summary.png" width="909">
+<img alt="Job summary" src="images/job-summary.png" width="909">
 
 ## Action versions
 
