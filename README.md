@@ -2,7 +2,7 @@
 
 # fish-shop/syntax-check
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/fish-shop/syntax-check/test.yml?branch=main&color=brightgreen&label=tests)](https://github.com/fish-shop/syntax-check/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/syntax-check)](https://github.com/fish-shop/syntax-check/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/syntax-check/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/fish-shop/syntax-check?label=OpenSSF%20Scorecard)](https://securityscorecards.dev/viewer/?uri=github.com/fish-shop/syntax-check) [![Tests](https://img.shields.io/github/actions/workflow/status/fish-shop/syntax-check/test.yml?branch=main&color=brightgreen&label=tests)](https://github.com/fish-shop/syntax-check/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/syntax-check)](https://github.com/fish-shop/syntax-check/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/syntax-check/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
 
 A GitHub action for syntax checking [fish shell](https://fishshell.com) files.
 
