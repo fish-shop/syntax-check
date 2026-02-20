@@ -32,7 +32,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Install fish shell
-        uses: fish-shop/install-fish-shell@4332ffa4187457d1ccfd008b02fd96eb277e32cb # v2.0.44
+        uses: fish-shop/install-fish-shell@64afe83d5e3ffdd22ae43a811b9c376e0fe19568 # v2.0.445
       - name: Create syntactically valid fish shell file
         run: |
           echo "\
