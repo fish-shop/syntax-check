@@ -30,9 +30,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Install fish shell
-        uses: fish-shop/install-fish-shell@3d3495a8edde019283ece78087c4da133d03dd57 # v2.1.16
+        uses: fish-shop/install-fish-shell@17c2b2fbcd85a9c9b38df604844590910b164b6b # v2.1.17
       - name: Create syntactically valid fish shell file
         run: |
           echo "\
